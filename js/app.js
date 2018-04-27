@@ -1,10 +1,6 @@
 // Enemies our player must avoid
 class Enemy {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // The image/sprite for our enemies
     constructor() {
         this.sprite = 'images/enemy-bug.png';
         this.x = -101;
@@ -29,7 +25,7 @@ class Enemy {
         } else {
             this.x = newX;
         }
-        
+
         // Handle collisions, trigger if the player is within
         // enemy's dimensions. Numerical values below are used to
         // fine tune collision rectangles.
@@ -37,7 +33,7 @@ class Enemy {
             player.reset();
             player.score = 0;
             player.renderScore();
-        } 
+        }
     }
 
     // Draw the enemy on the screen, required method for game
@@ -45,20 +41,20 @@ class Enemy {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
+    // Get random row (y) position.
     randomRow() {
         this.row = Math.floor(Math.random() * 100) % 3 + 1;
         return 83 *  this.row - 21;
     }
 
+    // Get random speed value
     randomSpeed() {
         return 130 + Math.floor(Math.random() * 1000) % 331;
     }
 };
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 class Player {
 
     constructor() {
@@ -78,7 +74,7 @@ class Player {
         // Prevent the player from going off map
         this.x = this.x > 101 * 4 ? 101 * 4 : this.x;
         this.x = this.x < 0 ? 0 : this.x;
-        
+
         if (this.y > this.startY) {
             this.y = this.startY;
             this.row -= 1;
@@ -122,7 +118,7 @@ class Player {
         this.x = this.startX;
         this.y = this.startY;
     }
-    
+
     renderScore() {
         document.querySelector('.score').textContent = this.score;
     }
